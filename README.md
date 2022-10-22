@@ -1,4 +1,5 @@
 //前端
+
 // dianming.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 
 #include <stdio.h>//c语言
@@ -90,4 +91,55 @@ int main()
     system("pause > nul");
     return 0;
 }
+
+
+//数据库部分
+
+# 创建数据库
+create database if not exists dm ;
+use dm;
+
+# 学生表
+CREATE TABLE if not exists Student(
+s_id int,
+s_name VARCHAR(20) NOT NULL DEFAULT '',
+s_birth VARCHAR(20) NOT NULL DEFAULT '',
+s_sex VARCHAR(10) NOT NULL DEFAULT '',
+PRIMARY KEY(s_id)
+);
+
+# 课程表
+CREATE TABLE if not exists Course(
+c_id int,
+c_name VARCHAR(20) NOT NULL DEFAULT '',
+PRIMARY KEY(c_id)
+);
+
+#签到表
+create table if not exists sign
+(
+id int auto_increment not null primary key,
+s_id varchar(20) not null,
+c_id varchar(20) not null,
+sig bool default true,
+sign_time datetime default now(),
+foreign key(s_id) references student(s_id),
+foreign key(c_id) references course(c_id)
+);
+
+# 插入学生表测试数据
+insert into Student values(1 , '赵雷' , '1990-01-01' , '男');
+insert into Student values(2 , '钱电' , '1990-12-21' , '男');
+insert into Student values(3 , '孙风' , '1990-05-20' , '男');
+insert into Student values(4 , '李云' , '1990-08-06' , '男');
+insert into Student values(5 , '周梅' , '1991-12-01' , '女');
+insert into Student values(6, '吴兰' , '1992-03-01' , '女');
+insert into Student values(7 , '郑竹' , '1989-07-01' , '女');
+insert into Student values(8 , '王菊' , '1990-01-20' , '女');
+
+
+# 课程表测试数据
+insert into Course values(1 , '语文' );
+insert into Course values(2 , '数学' );
+insert into Course values(3 , '英语' );
 
