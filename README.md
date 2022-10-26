@@ -1,4 +1,4 @@
-//前端
+//C语言部分
 
 // dianming.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 
@@ -6,6 +6,7 @@
 #include <iostream>//c++语言
 #include <string.h>//字符串
 #include <conio.h>//_getch()在这个文件中
+#include <winsock2.h>//网络通信
 #include "include\mysql.h"//数据库
 #pragma comment(lib,"./lib/libmysql.lib")//数据库
 using namespace std;
@@ -24,7 +25,7 @@ int main()
     //判断如果连接失败就把连接失败的信息显示出来，我们好进行对应修改。
     // mysql_real_connect参数：2.本地地址 3.你的mysql用户名 4.你的mysql密码 5.数据库名字 6.端口号
 
-    if (mysql_real_connect(&mysql, "localhost", "root", "CuiJiaxue0904", "dm", 3306, NULL, 0) == NULL) {
+    if (mysql_real_connect(&mysql, "localhost", "root", " ", "dm", 3306, NULL, 0) == NULL) {
         cout << (mysql_error(&mysql)) << endl;
     }
     //输出所有课程，选择当前签到课程
@@ -57,7 +58,6 @@ int main()
         printf("%s ", row[3]);//打印性别
         printf("这位同学来上课了吗?(y/n):");
         char ch = _getch();//不用回车就可读入字符
-        putchar(ch);
         //构造查询字符串
         if (ch == 'n' || ch == 'N') {
             sprintf_s(strsql, 1024, "insert into sign(s_id,c_id,sig,sign_time) values('%s',%d,0,now())", row[0], c_id);
